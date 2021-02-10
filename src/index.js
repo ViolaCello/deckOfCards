@@ -1,9 +1,10 @@
 // create a deck of cards from scratch
 
-const ranks = ["Ace", "King", "Queen", "Jack", "10", "9", "8", "7", "6", "5", "4", "3", "2"]
-const suits = ["Clubs", "Diamonds", "Hearts", "Spades"]
 
-const createDeck = (ranks, suits) => {
+
+const createDeck = () => {
+    const ranks = ["Ace", "King", "Queen", "Jack", "10", "9", "8", "7", "6", "5", "4", "3", "2"]
+    const suits = ["Clubs", "Diamonds", "Hearts", "Spades"]
     let fullDeck = []
     ranks.forEach(rank => {
         suits.forEach(suit => {
@@ -14,8 +15,6 @@ const createDeck = (ranks, suits) => {
     });
     return fullDeck
 }
-
-const cards = createDeck(ranks, suits)
 
 function showCards(cards) {
     cards.forEach(card => {
@@ -39,19 +38,15 @@ const cutTheDeck = deck => {
     }
     // like in real life, the cut of the deck is never exactly half
     let depthOfCut = Math.floor((Math.random() * 20) + (20)) * amountOfDecks 
-    console.log(depthOfCut)
     // create two piles of cards
     let leftPile = []
     let rightPile = []
     const createTwoPiles = cc => {
-        
-        console.log("Line51 ", cc.length, depthOfCut)
         if (depthOfCut !=0) {
             leftPile.push(cc.shift())
             depthOfCut--
             return createTwoPiles(cc)
         } else {
-            console.log("What's left of deck=", deck)
             deck.forEach(d => {
                 rightPile.push(d)
             })
@@ -64,9 +59,6 @@ const cutTheDeck = deck => {
    return createTwoPiles(deck)
 }
 
-let c = cutTheDeck(cards)
-
-
 // Now that the deck is cut, we need to shuffle the cards back together (ie., merge)
 // this will take in an array of the two halfs of the deck(s) we just cut
 const combineHalfDecks = decks => {
@@ -76,9 +68,28 @@ const combineHalfDecks = decks => {
         combinedDecks.push(decks[side].shift()) 
     } 
     return combinedDecks.concat(decks[0]).concat(decks[1])
-    
 }
 
-let shuffledDeck = combineHalfDecks(c)
-console.log(shuffledDeck.length)
-showCards(shuffledDeck)
+// go through a shuffling motion once
+const shuffleCards = (deck) => {
+    let cutD = cutTheDeck(deck)
+    let shuffle = combineHalfDecks(cutD)
+    return shuffle
+}
+
+// One function that goes through the sequence of creating a deck of cards, and shuffling them a random number of times between 3 and 9 times.
+
+const createAndShuffleCards = () => {
+    let cards = createDeck()
+    showCards(cards)
+    let s = cards
+    let n = Math.random() * (9 - 3 ) + 3;
+    for (let i = 0; i<n; i++) {
+      s = shuffleCards(s)
+      console.log("In loop #", i+1)
+        showCards(s)
+    }
+    return s
+}
+let c = createAndShuffleCards()
+showCards(c)
