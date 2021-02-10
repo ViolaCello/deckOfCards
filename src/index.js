@@ -74,14 +74,16 @@ console.log("This is C", c)
 // Now that the deck is cut, we need to shuffle the cards back together (ie., merge)
 // this will take in an array of the two halfs of the deck(s) we just cut
 const combineHalfDecks = decks => {
-    debugger
+  //  debugger
     let combinedDecks = []
     while (decks[0].length !=0 && decks[1].length !=0) {
         let side = Math.round(Math.random()) // when shuffling a deck, there is never an even insertion of left and right, replicating it here
         combinedDecks.push(decks[side].shift()) 
     } 
-    combinedDecks.concat(decks[0]).concat(decks[1])
-    console.log("Combined Decks=", combinedDecks)
+    return combinedDecks.concat(decks[0]).concat(decks[1])
+    
 }
 
-combineHalfDecks(c)
+let shuffledDeck = combineHalfDecks(c)
+console.log(shuffledDeck.length)
+showCards(shuffledDeck)
