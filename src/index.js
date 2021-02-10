@@ -25,15 +25,33 @@ console.log(cards)
 
 const cutTheDeck = deck => {
     // check that the deck(s) are a full 52 cards each
-    let amountOfDecks = (deck.length*2) / 52
+    let amountOfDecks = deck.length / 52
     if (deck.length % 52 != 0) {
         return ("This is not a full legal deck")
     } else {
         
         console.log (`There is/are ${amountOfDecks} full deck(s) here.`)
     }
-    let depthOfCut = Math.floor((Math.random() * 20) + (20)) * amountOfDecks ;
+    // like in real life, the cut of the deck is never exactly half
+    let depthOfCut = Math.floor((Math.random() * 20) + (20)) * amountOfDecks 
     console.log(depthOfCut)
+    // create two piles of cards
+    let leftPile = []
+    let rightPile = []
+    const createTwoPiles = deck => {
+        console.log("Line 42")
+        leftPile.push(deck.shift())
+        if (depthOfCut !=0) {
+            depthOfCut--
+            return createTwoPiles(deck)
+        } else {
+            rightPile.push(deck)
+        }
+        console.log("Left=", leftPile.length, " ", leftPile)
+        console.log("Right=", rightPile.length, " ", rightPile)
+    }
+    createTwoPiles(deck)
+    console.log("End")
 }
 
 cutTheDeck(cards)
