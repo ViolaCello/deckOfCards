@@ -25,12 +25,15 @@ console.log(cards)
 
 const cutTheDeck = deck => {
     // check that the deck(s) are a full 52 cards each
+    let amountOfDecks = (deck.length*2) / 52
     if (deck.length % 52 != 0) {
         return ("This is not a full legal deck")
     } else {
-        console.log (`There is/are ${(deck.length / 52)} full deck(s) here.`)
+        
+        console.log (`There is/are ${amountOfDecks} full deck(s) here.`)
     }
-    console.log("we are here now")
+    let depthOfCut = Math.floor((Math.random() * 20) + (20)) * amountOfDecks ;
+    console.log(depthOfCut)
 }
 
 cutTheDeck(cards)
