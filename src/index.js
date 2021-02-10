@@ -12,7 +12,6 @@ const createDeck = (ranks, suits) => {
             fullDeck.push(newCard)
         })
     });
-  console.log(fullDeck)
     return fullDeck
 }
 
@@ -24,7 +23,6 @@ function showCards(cards) {
     })
 }
 
-showCards(cards)
 
 // Shuffle the deck
 
@@ -63,18 +61,15 @@ const cutTheDeck = deck => {
         result.push(rightPile)
         return result
     }
-   let twoHalves = createTwoPiles(deck)
-   return twoHalves
-    
+   return createTwoPiles(deck)
 }
 
 let c = cutTheDeck(cards)
-console.log("This is C", c)
+
 
 // Now that the deck is cut, we need to shuffle the cards back together (ie., merge)
 // this will take in an array of the two halfs of the deck(s) we just cut
 const combineHalfDecks = decks => {
-  //  debugger
     let combinedDecks = []
     while (decks[0].length !=0 && decks[1].length !=0) {
         let side = Math.round(Math.random()) // when shuffling a deck, there is never an even insertion of left and right, replicating it here
