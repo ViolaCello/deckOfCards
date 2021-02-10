@@ -12,12 +12,19 @@ const createDeck = (ranks, suits) => {
             fullDeck.push(newCard)
         })
     });
-    // console.log(fullDeck)
+  console.log(fullDeck)
     return fullDeck
 }
 
-let cards = createDeck(ranks, suits)
-console.log(cards)
+const cards = createDeck(ranks, suits)
+
+function showCards(cards) {
+    cards.forEach(card => {
+        console.log(card)
+    })
+}
+
+showCards(cards)
 
 // Shuffle the deck
 
@@ -38,20 +45,43 @@ const cutTheDeck = deck => {
     // create two piles of cards
     let leftPile = []
     let rightPile = []
-    const createTwoPiles = deck => {
-        console.log("Line 42")
-        leftPile.push(deck.shift())
+    const createTwoPiles = cc => {
+        
+        console.log("Line51 ", cc.length, depthOfCut)
         if (depthOfCut !=0) {
+            leftPile.push(cc.shift())
             depthOfCut--
-            return createTwoPiles(deck)
+            return createTwoPiles(cc)
         } else {
-            rightPile.push(deck)
+            console.log("What's left of deck=", deck)
+            deck.forEach(d => {
+                rightPile.push(d)
+            })
         }
-        console.log("Left=", leftPile.length, " ", leftPile)
-        console.log("Right=", rightPile.length, " ", rightPile)
+        let result = []
+        result.push(leftPile)
+        result.push(rightPile)
+        return result
     }
-    createTwoPiles(deck)
-    console.log("End")
+   let twoHalves = createTwoPiles(deck)
+   return twoHalves
+    
 }
 
-cutTheDeck(cards)
+let c = cutTheDeck(cards)
+console.log("This is C", c)
+
+// Now that the deck is cut, we need to shuffle the cards back together (ie., merge)
+// this will take in an array of the two halfs of the deck(s) we just cut
+const combineHalfDecks = decks => {
+    debugger
+    let combinedDecks = []
+    while (decks[0].length !=0 && decks[1].length !=0) {
+        let side = Math.round(Math.random()) // when shuffling a deck, there is never an even insertion of left and right, replicating it here
+        combinedDecks.push(decks[side].shift()) 
+    } 
+    combinedDecks.concat(decks[0]).concat(decks[1])
+    console.log("Combined Decks=", combinedDecks)
+}
+
+combineHalfDecks(c)
