@@ -91,5 +91,32 @@ const createAndShuffleCards = () => {
     }
     return s
 }
-let c = createAndShuffleCards()
-showCards(c)
+
+// play War
+// deal cards between player and computer
+const dealCards = () => {
+    let c = createAndShuffleCards()
+    // deal from the top of the stack using .pop()
+    let nDeck = c.length/2
+    let player = []
+    let computer = []
+    for (let i = 0; i<nDeck; i++) {
+        player.push(c.pop())
+        computer.push(c.pop())
+    }
+   return ([player, computer])
+}
+
+// play WAR
+const playWar = () => {
+    let d = dealCards()
+    let player = d[0]
+    let computer = d[1]
+    console.log(d)
+    for (let i =0; i<player.length; i++) {
+        console.log("Player Has: ", player[i], " Computer Has: ", computer[i])
+        debugger
+    }
+}
+
+playWar()
