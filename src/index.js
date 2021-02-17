@@ -1,7 +1,4 @@
 // create a deck of cards from scratch
-
-
-
 const createDeck = () => {
     const ranks = ["Ace", "King", "Queen", "Jack", "10", "9", "8", "7", "6", "5", "4", "3", "2"]
     const suits = ["Clubs", "Diamonds", "Hearts", "Spades"]
@@ -9,7 +6,8 @@ const createDeck = () => {
     ranks.forEach(rank => {
         suits.forEach(suit => {
             let newCard = {}
-            newCard[rank]=suit
+            newCard["rank"]=rank
+            newCard["suit"]=suit
             fullDeck.push(newCard)
         })
     });
@@ -33,7 +31,7 @@ const cutTheDeck = deck => {
     if (deck.length % 52 != 0) {
         return ("This is not a full legal deck")
     } else {
-        
+ 
         console.log (`There is/are ${amountOfDecks} full deck(s) here.`)
     }
     // like in real life, the cut of the deck is never exactly half
