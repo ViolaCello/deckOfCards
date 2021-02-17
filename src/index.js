@@ -16,7 +16,7 @@ const createDeck = () => {
 
 function showCards(cards) {
     cards.forEach(card => {
-        console.log(card)
+        console.log(card["rank"], card["suit"])
     })
 }
 
